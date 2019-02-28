@@ -84,7 +84,7 @@ public class Aplicacao {
 	}
 
 	public static int telaCadastro(Pessoa lPessoa[], int auxPessoa, int tipo) throws Exception {
-		
+
 		System.out.print("Nome: ");
 		String nome = Reader.readString();
 
@@ -112,7 +112,7 @@ public class Aplicacao {
 			System.out.print("Especialidade: ");
 			String especialidade = Reader.readString();
 			medico.setEspecialidade(especialidade);
-			
+
 			lPessoa[auxPessoa] = medico;
 
 		} else if (tipo == 2) {
@@ -126,7 +126,7 @@ public class Aplicacao {
 			System.out.print("Carga Horária: ");
 			int cargaHoraria = Reader.readInt();
 			enf.setCarga_horaria(cargaHoraria);
-			
+
 			lPessoa[auxPessoa] = enf;
 
 		} else {
@@ -140,7 +140,7 @@ public class Aplicacao {
 			System.out.print("Salario: ");
 			double salario = Reader.readDouble();
 			aux.setSalario(salario);
-			
+
 			lPessoa[auxPessoa] = aux;
 		}
 		auxPessoa++;
