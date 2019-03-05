@@ -30,7 +30,7 @@ public class Aplicacao {
 			default:
 				System.out.println("Opcao Invalida");
 			}
-			System.out.println();
+			System.out.println("");
 			opc = menuPrincipal();
 		}
 	}
@@ -44,7 +44,7 @@ public class Aplicacao {
 		System.out.print("===> ");
 
 		int opc = Reader.readInt();
-		System.out.print("");
+		System.out.println("");
 
 		return opc;
 	}
@@ -59,7 +59,6 @@ public class Aplicacao {
 		System.out.print("===> ");
 
 		int opc = Reader.readInt();
-		System.out.println("");
 
 		return opc;
 	}
@@ -149,6 +148,7 @@ public class Aplicacao {
 			lPessoa[auxPessoa] = aux;
 		}
 		auxPessoa++;
+		System.out.println("");
 		return auxPessoa;
 	}
 }
