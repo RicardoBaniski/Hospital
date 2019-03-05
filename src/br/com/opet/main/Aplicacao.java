@@ -30,6 +30,7 @@ public class Aplicacao {
 			default:
 				System.out.println("Opcao Invalida");
 			}
+			System.out.println();
 			opc = menuPrincipal();
 		}
 	}
@@ -40,8 +41,10 @@ public class Aplicacao {
 		System.out.println("1 - Cadastrar");
 		System.out.println("2 - Consultar");
 		System.out.println("0 - Sair");
+		System.out.print("===> ");
 
 		int opc = Reader.readInt();
+		System.out.print("");
 
 		return opc;
 	}
@@ -53,8 +56,10 @@ public class Aplicacao {
 		System.out.println("2 - Enfermeiro");
 		System.out.println("3 - Auxiliar Adm");
 		System.out.println("0 - Voltar");
+		System.out.print("===> ");
 
 		int opc = Reader.readInt();
+		System.out.println("");
 
 		return opc;
 	}
