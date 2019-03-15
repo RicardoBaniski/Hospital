@@ -1,6 +1,8 @@
 package br.com.opet.main;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.opet.util.Reader;
 
@@ -13,24 +15,28 @@ public class Aplicacao {
 
 	public static void main(String[] args) throws Exception {
 
-		Pessoa lPessoa[] = new Pessoa[10];
-		int auxPessoa = 0;
+		ArrayList<Pessoa> alPessoa = new ArrayList<Pessoa>();
+		HashMap<Integer, String> mapEspecialidade = new HashMap<Integer, String>();
+
+		mapEspecialidade.put(0, "Cardiologista");
+		mapEspecialidade.put(1, "Otorrino");
+		mapEspecialidade.put(2, "Neuro");
+		mapEspecialidade.put(3, "Nefrologista");
+		mapEspecialidade.put(4, "Generalista");
 
 		int opc = -1;
 		opc = menuPrincipal();
-
 		while (opc != 0) {
 			switch (opc) {
 			case 1:
-				auxPessoa = cadastrar(lPessoa, auxPessoa);
+				menuSubMenu(opc, alPessoa, mapEspecialidade);
 				break;
 			case 2:
-				consultar(lPessoa, auxPessoa);
+				menuSubMenu(opc, alPessoa, mapEspecialidade);
 				break;
 			default:
 				System.out.println("Opcao Invalida");
 			}
-			System.out.println("");
 			opc = menuPrincipal();
 		}
 	}
@@ -38,8 +44,8 @@ public class Aplicacao {
 	public static int menuPrincipal() throws Exception {
 		System.out.println("Informe uma opcao");
 		System.out.println("===================");
-		System.out.println("1 - Cadastrar");
-		System.out.println("2 - Consultar");
+		System.out.println("1 - Pessoa");
+		System.out.println("2 - Especialidade");
 		System.out.println("0 - Sair");
 		System.out.print("===> ");
 
@@ -47,6 +53,37 @@ public class Aplicacao {
 		System.out.println("");
 
 		return opc;
+	}
+
+	public static void menuSubMenu(int opc, ArrayList<Pessoa> alPessoa, HashMap<Integer, String> mapEspecialidade)
+			throws Exception {
+		System.out.println("Informe uma opcao");
+		System.out.println("===================");
+		System.out.println("1 - Cadastrar");
+		System.out.println("2 - Consultar");
+		System.out.println("0 - Voltar");
+		System.out.print("===> ");
+
+		int opcSub = Reader.readInt();
+		System.out.println("");
+		int swtc = (opc * 10) + opcSub;
+
+		switch (swtc) {
+		case 11:
+			cadastrarPessoa(alPessoa, mapEspecialidade);
+			break;
+		case 12:
+			consultarPessoa(alPessoa, mapEspecialidade);
+			break;
+		case 21:
+			cadastrarEspecialidade(mapEspecialidade);
+			break;
+		case 22:
+			consultarEspecialidade(mapEspecialidade);
+			break;
+		default:
+			System.out.println("Opcao Invalida");
+		}
 	}
 
 	public static int menuCadastrar() throws Exception {
@@ -59,17 +96,18 @@ public class Aplicacao {
 		System.out.print("===> ");
 
 		int opc = Reader.readInt();
-
+		System.out.println("");
 		return opc;
 	}
 
-	public static void consultar(Pessoa lPessoa[], int auxPessoa) {
-		for (int i = 0; i < auxPessoa; i++) {
-			System.out.println(lPessoa[i].toString());
+	public static void consultarPessoa(ArrayList<Pessoa> alPessoa, HashMap<Integer, String> mapEspecialidade) {
+		for (Pessoa p : alPessoa) {
+			System.out.println(p.toString());
 		}
 	}
 
-	public static int cadastrar(Pessoa lPessoa[], int auxPessoa) throws Exception {
+	public static void cadastrarPessoa(ArrayList<Pessoa> alPessoa, HashMap<Integer, String> mapEspecialidade)
+			throws Exception {
 		int opc = menuCadastrar();
 
 		while (opc != 0) {
@@ -77,31 +115,26 @@ public class Aplicacao {
 			case 1:
 			case 2:
 			case 3:
-				auxPessoa = telaCadastro(lPessoa, auxPessoa, opc);
+				telaCadastro(alPessoa, mapEspecialidade, opc);
 				break;
 			default:
 				System.out.print("Opcao Invalida");
 			}
 			opc = menuCadastrar();
 		}
-		return auxPessoa;
 	}
 
-	public static int telaCadastro(Pessoa lPessoa[], int auxPessoa, int tipo) throws Exception {
-
+	public static void telaCadastro(ArrayList<Pessoa> alPessoa, HashMap<Integer, String> mapEspecialidade, int tipo)
+			throws Exception {
 		System.out.print("Nome: ");
 		String nome = Reader.readString();
-
 		System.out.print("Data de Nascimento: ");
 		String dtNasc = Reader.readString();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
 		System.out.print("CPF: ");
 		String cpf = Reader.readString();
-
 		System.out.print("Sexo: ");
 		String sexo = Reader.readString();
-
 		System.out.print("Telefone: ");
 		String telefone = Reader.readString();
 
@@ -113,11 +146,20 @@ public class Aplicacao {
 			medico.setSexo(sexo);
 			medico.setTelefone(telefone);
 
-			System.out.print("Especialidade: ");
-			String especialidade = Reader.readString();
-			medico.setEspecialidade(especialidade);
+			System.out.println("Especialidades:\n");
+			int esp = -1;
+			do {
+				for (int i = 0; i < mapEspecialidade.size(); i++) {
+					System.out.println(i + " - " + mapEspecialidade.get(i));
+				}
+				System.out.print("\nInforme uma opcao: ");
+				esp = Reader.readInt();
+				System.out.println("");
+			} while (!mapEspecialidade.containsKey(esp));
 
-			lPessoa[auxPessoa] = medico;
+			medico.setMapEspecialidade(mapEspecialidade);
+			medico.setEspecialidade(esp);
+			alPessoa.add(medico);
 
 		} else if (tipo == 2) {
 			Enfermeiro enf = new Enfermeiro();
@@ -130,8 +172,7 @@ public class Aplicacao {
 			System.out.print("Carga Horária: ");
 			int cargaHoraria = Reader.readInt();
 			enf.setCarga_horaria(cargaHoraria);
-
-			lPessoa[auxPessoa] = enf;
+			alPessoa.add(enf);
 
 		} else {
 			AuxiliarAdministrativo aux = new AuxiliarAdministrativo();
@@ -144,11 +185,19 @@ public class Aplicacao {
 			System.out.print("Salario: ");
 			double salario = Reader.readDouble();
 			aux.setSalario(salario);
-
-			lPessoa[auxPessoa] = aux;
+			alPessoa.add(aux);
 		}
-		auxPessoa++;
-		System.out.println("");
-		return auxPessoa;
+	}
+
+	public static void cadastrarEspecialidade(HashMap<Integer, String> mapEspecialidade) {
+		System.out.println("Informe a descricao da nova especialidade");
+		String esp = Reader.readString();
+		mapEspecialidade.put(mapEspecialidade.size(), esp);
+	}
+
+	public static void consultarEspecialidade(HashMap<Integer, String> mapEspecialidade) {
+		for (int i = 0; i < mapEspecialidade.size(); i++) {
+			System.out.println(i + " - " + mapEspecialidade.get(i));
+		}
 	}
 }
