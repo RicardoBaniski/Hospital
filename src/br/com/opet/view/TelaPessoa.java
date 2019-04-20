@@ -65,9 +65,6 @@ public class TelaPessoa {
 		System.out.print("Sexo: ");
 		String sexo = Reader.readString();
 
-		System.out.print("Telefone: ");
-		String telefone = Reader.readString();
-
 		Pessoa p = null;
 
 		if (opc == 1) {
@@ -82,10 +79,10 @@ public class TelaPessoa {
 				} catch (Exception e) {
 					System.out.println("O valor informado deve ser um numero inteiro");
 				}
-			} while (!idEspecialidade.containsKey(idEspecialidade));
+			} while (!idEspecialidade.containsKey(null));
 
 			try {
-				p = new Medico(opc, nome, sdf.parse(dtNascimento), cpf, sexo, telefone, esp);
+				p = new Medico(opc, nome, sdf.parse(dtNascimento), cpf, sexo, esp);
 			} catch (ParseException e) {
 				System.out.println("O formato da data de nascimento deve ser dd/MM/yyyy");
 			}
@@ -99,7 +96,7 @@ public class TelaPessoa {
 				System.out.println("O valor informado deve ser um numero inteiro");
 			}
 			try {
-				p = new Enfermeiro(opc, nome, sdf.parse(dtNascimento), cpf, sexo, telefone, cargaHoraria);
+				p = new Enfermeiro(opc, nome, sdf.parse(dtNascimento), cpf, sexo, cargaHoraria);
 			} catch (ParseException e) {
 				System.out.println("O formato da data de nascimento deve ser dd/MM/yyyy");
 			}
@@ -113,7 +110,7 @@ public class TelaPessoa {
 				System.out.println("O valor informado deve ser no formato 9.99");
 			}
 			try {
-				p = new AuxiliarAdministrativo(opc, nome, sdf.parse(dtNascimento), cpf, sexo, telefone, salario);
+				p = new AuxiliarAdministrativo(opc, nome, sdf.parse(dtNascimento), cpf, sexo, salario);
 			} catch (ParseException e) {
 				System.out.println("O formato da data de nascimento deve ser dd/MM/yyyy");
 			}

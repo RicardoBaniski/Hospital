@@ -66,19 +66,14 @@ public class ControllerPessoa {
 
 	public void Listar() {
 		PessoaDAO pDAO = new PessoaDAO();
-
 		ArrayList<Pessoa> alPessoa = pDAO.listar();
-
 		for (Pessoa pTMP : alPessoa) {
 			tp.showPessoa(pTMP);
 		}
 	}
+
 	public void Apagar() {
 		PessoaDAO pDAO = new PessoaDAO();
-		
 		ArrayList<Pessoa> alPessoa = pDAO.listar();
-		
-		
-		
 	}
 }

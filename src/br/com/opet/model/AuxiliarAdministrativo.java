@@ -7,14 +7,13 @@ import br.com.opet.model.top.Pessoa;
 public class AuxiliarAdministrativo extends Pessoa {
 	private double Salario;
 
-	public AuxiliarAdministrativo(int tipo, String nome, Date dtNascimento, String cpf, String sexo, String telefone,
+	public AuxiliarAdministrativo(int tipo, String nome, Date dtNascimento, String cpf, String sexo,
 			double Salario) {
 		this.Tipo = tipo;
 		this.nome = nome;
 		this.dtNascimento = dtNascimento;
 		this.cpf = cpf;
 		this.Sexo = sexo;
-		this.telefone = telefone;
 		this.Salario = Salario;
 	}
 

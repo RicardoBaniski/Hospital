@@ -10,14 +10,13 @@ public class Pessoa {
 	protected Date dtNascimento;
 	protected String cpf;
 	protected String Sexo;
-	protected String telefone;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	public String toString() {
 		String str = "";
 		String dtNascimento = sdf.format(this.dtNascimento).toString();
-		str = this.nome + " - " + dtNascimento + " - " + this.cpf + " - " + this.Sexo + " - " + this.telefone;
+		str = this.nome + " - " + dtNascimento + " - " + this.cpf + " - " + this.Sexo;
 
 		return str;
 	}
@@ -52,14 +51,6 @@ public class Pessoa {
 
 	public void setSexo(String sexo) {
 		Sexo = sexo;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	public int getTipo() {

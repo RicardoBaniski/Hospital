@@ -37,6 +37,8 @@ INSERT INTO especialidade (
     'Oftalmologista'
 );
 
+CREATE SEQUENCE seq_pessoa INCREMENT BY 1 START WITH 1;
+
 CREATE TABLE pessoa (
     id_pessoa   INT,
     nome        VARCHAR(500),

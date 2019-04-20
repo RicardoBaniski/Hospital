@@ -16,12 +16,11 @@ public class PessoaDAO {
 
 		try {
 			con.setAutoCommit(false);
-			stmt = con.prepareStatement("insert into pessoa(cpf,nome,sexo,telefone,dt_nascimento) values (?,?,?,?,?)");
-			stmt.setString(1, pTMP.getCpf());
-			stmt.setString(2, pTMP.getNome());
-			stmt.setString(3, pTMP.getSexo());
-			stmt.setString(4, pTMP.getTelefone());
-			stmt.setDate(5, new Date(pTMP.getDtNascimento().getTime()));
+			stmt = con.prepareStatement("INSERT INTO PESSOA(ID_PESSOA, NOME, CPF, DT_NASC, SEXO) VALUES (SEQ_PESSOA.NEXTVAL,?,?,?,?)");
+			stmt.setString(1, pTMP.getNome());
+			stmt.setString(2, pTMP.getCpf());
+			stmt.setDate(3, new Date(pTMP.getDtNascimento().getTime()));
+			stmt.setString(4, pTMP.getSexo());			
 
 			int rowAf = stmt.executeUpdate();
 			if (rowAf == 1) {
@@ -57,7 +56,7 @@ public class PessoaDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			stmt = con.prepareStatement("update pessoa set nome = ? where cpf = ?");
+			stmt = con.prepareStatement("UPDATE PESSOA SET NOME = ? WHERE CPF = ?");
 			stmt.setString(1, pTMP.getNome());
 			stmt.setString(2, pTMP.getCpf());
 
@@ -73,7 +72,7 @@ public class PessoaDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			stmt = con.prepareStatement("delete from pessoa where cpf = ?");
+			stmt = con.prepareStatement("DELETE FROM PESSOA WHERE CPF = ?");
 			stmt.setString(1, pTMP.getCpf());
 			int rowAf = stmt.executeUpdate();
 			if (rowAf == 1) {
@@ -111,15 +110,14 @@ public class PessoaDAO {
 
 		try {
 			con.setAutoCommit(false);
-			stmt = con.prepareStatement("select nome from pessoa where nome = ?");
+			stmt = con.prepareStatement("SELECT NOME FROM PESSOA WHERE NOME = ?");
 			stmt.setString(1, pTMP.getNome());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				peTMP.setNome(rs.getString("nome"));
-				peTMP.setCpf(rs.getString("cpf"));
+				peTMP.setNome(rs.getString("NOME"));
+				peTMP.setCpf(rs.getString("CPF"));
 				peTMP.setDtNascimento(rs.getDate("dt_nasc"));
 				peTMP.setSexo(rs.getString("sexo"));
-				peTMP.setTelefone(rs.getString("telefone"));
 			}
 		} catch (Exception e) {
 			System.out.println("Nao foi possivel recuperar pessoa");
@@ -143,7 +141,7 @@ public class PessoaDAO {
 		ResultSet rs = null;
 
 		try {
-			stmt = con.prepareStatement("select cpf,nome,sexo,telefone,dt_nascimento from pessoa");
+			stmt = con.prepareStatement("SELECT CPF,NOME,SEXO,TELEFONE,DT_NASCIMENTO FROM PESSOA");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -151,7 +149,6 @@ public class PessoaDAO {
 				pTMP.setCpf(rs.getString("cpf"));
 				pTMP.setNome(rs.getString("nome"));
 				pTMP.setSexo(rs.getString("sexo"));
-				pTMP.setTelefone(rs.getString("telefone"));
 				pTMP.setDtNascimento(rs.getDate("dt_nascimento"));
 				alPessoa.add(pTMP);
 			}
