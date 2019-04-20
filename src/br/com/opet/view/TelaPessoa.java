@@ -2,14 +2,16 @@ package br.com.opet.view;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.opet.util.Reader;
 
 import br.com.opet.controller.ControllerEspecialidade;
 import br.com.opet.model.AuxiliarAdministrativo;
 import br.com.opet.model.Enfermeiro;
+import br.com.opet.model.Especialidade;
 import br.com.opet.model.Medico;
+import br.com.opet.model.dao.EspecialidadeDAO;
 import br.com.opet.model.top.Pessoa;
 
 public class TelaPessoa {
@@ -70,17 +72,17 @@ public class TelaPessoa {
 
 		if (opc == 1) {
 			int esp = -1;
-			ArrayList<Integer> idEspecialidade = cEspecialidade.Listar();
+			HashMap<Integer, Especialidade> idEspecialidade = cEspecialidade.getMapEspecialidade();
 			System.out.println("Especialidade: ");
 			do {
 				System.out.println("informe uma opcao:");
-				cEspecialidade.Listar();
+				cEspecialidade.getMapEspecialidade();
 				try {
 					esp = Reader.readInt();
 				} catch (Exception e) {
 					System.out.println("O valor informado deve ser um numero inteiro");
 				}
-			} while (!idEspecialidade.contains(esp));
+			} while (!idEspecialidade.containsKey(idEspecialidade));
 
 			try {
 				p = new Medico(opc, nome, sdf.parse(dtNascimento), cpf, sexo, telefone, esp);

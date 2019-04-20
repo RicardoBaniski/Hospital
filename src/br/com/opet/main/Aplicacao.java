@@ -20,7 +20,7 @@ public class Aplicacao {
 				cPessoa.showSubMenuPessoa();
 				break;
 			case 2:
-				cEspecialidade.showSubMenuEspecialidade();
+				cEspecialidade.menuEspecialidade();
 				break;
 			default:
 				System.out.println("Opcao Invalida");

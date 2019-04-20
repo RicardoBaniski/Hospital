@@ -31,6 +31,8 @@ public class ControllerPessoa {
 				break;
 			case 2:
 				Listar();
+			case 3:
+				Apagar();
 			default:
 				break;
 			}
@@ -70,5 +72,13 @@ public class ControllerPessoa {
 		for (Pessoa pTMP : alPessoa) {
 			tp.showPessoa(pTMP);
 		}
+	}
+	public void Apagar() {
+		PessoaDAO pDAO = new PessoaDAO();
+		
+		ArrayList<Pessoa> alPessoa = pDAO.listar();
+		
+		
+		
 	}
 }

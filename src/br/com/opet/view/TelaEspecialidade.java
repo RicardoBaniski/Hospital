@@ -6,25 +6,55 @@ import br.com.opet.model.Especialidade;
 
 public class TelaEspecialidade {
 
-	public int showSubMenuPrincipal() throws Exception {
+	public int showSubMenuEspecialidade() throws Exception {
 		System.out.println("Informe uma opcao");
 		System.out.println("=================");
 		System.out.println("1 - Cadastrar");
-		System.out.println("2 - Consultar");
-		System.out.println("0 - Sair");
+		System.out.println("2 - Listar");
+		System.out.println("3 - Alter");
+		System.out.println("4 - Excluir");
+		System.out.println("5 - Consultar");
+		System.out.println("0 - Voltar");
 
-		int opc = Reader.readInt();
-
-		return opc;
+		int opcSub;
+		try {
+			opcSub = Reader.readInt();
+		} catch (Exception e) {
+			return -1;
+		}
+		return opcSub;
 	}
 
-	public Especialidade showCadastrar() throws Exception {
+	public Especialidade showCadastrar() {
 		System.out.println("Informe o nome da nova ESPECIALIDADE: ");
-		String nomeEspecialidade = Reader.readString();
-		return new Especialidade(nomeEspecialidade);
+		String esp = Reader.readString();
+		Especialidade espTMP = new Especialidade(esp);
+
+		return espTMP;
 	}
 
-	public void showEspecialidade(Especialidade e) {
-		System.out.println(e.getId() + " - " + e.getDescricao());
+	public void showListarEspecialidade(Especialidade pEsp) {
+		System.out.println(pEsp.getId() + " - " + pEsp.getDescricao());
+	}
+
+	public int showGetIDEspecialidade() {
+		System.out.println("Informe o ID da Especialidade:");
+		int id;
+		do {
+			try {
+				id = Reader.readInt();
+			} catch (Exception e) {
+				id = -1;
+				System.out.println("ID inválido!");
+			}
+			if (id < 0) {
+				System.out.println("ID inválido!");
+			}
+		} while (id < 0);
+		return id;
+	}
+
+	public void showEspecialidade(Especialidade pESP) {
+		System.out.println(pESP.getId() + " - " + pESP.getDescricao());
 	}
 }

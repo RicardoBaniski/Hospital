@@ -55,7 +55,6 @@ public class PessoaDAO {
 	public boolean atualizar(Pessoa pTMP) {
 		Connection con = Conexao.getConexao();
 		PreparedStatement stmt = null;
-		// recuperar(pTMP);
 		try {
 			con.setAutoCommit(false);
 			stmt = con.prepareStatement("update pessoa set nome = ? where cpf = ?");
@@ -74,8 +73,8 @@ public class PessoaDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			stmt = con.prepareStatement("delete from pessoa where nome = ?");
-			stmt.setString(1, pTMP.getNome());
+			stmt = con.prepareStatement("delete from pessoa where cpf = ?");
+			stmt.setString(1, pTMP.getCpf());
 			int rowAf = stmt.executeUpdate();
 			if (rowAf == 1) {
 				con.commit();
